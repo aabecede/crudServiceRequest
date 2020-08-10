@@ -12,5 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
+    return view('layout.content');
 });
+
+
+app('App\Http\Controllers\Original\RouteUrl')->route();
