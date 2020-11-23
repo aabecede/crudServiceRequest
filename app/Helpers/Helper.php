@@ -1,19 +1,13 @@
 <?php
 
 namespace App\Helpers;
-
-use App\Model\Data\HistoryPemeriksaanKesehatan;
-use App\Model\Data\HistoryTransaksiDonor;
-use App\Model\Master\MasterUdd;
-use App\Model\Master\Pendonors;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
-use ReflectionClass;
 
 class Helper
 {
-    public static function success_alert($message)
+    public static function successAlert($message)
     {
         $string = '';
         if (is_array($message)) {
@@ -35,7 +29,7 @@ class Helper
         return $alert;
     }
 
-    public static function parsing_alert($message)
+    public static function parsingAlert($message)
     {
         $string = '';
         if (is_array($message)) {
@@ -48,7 +42,7 @@ class Helper
         return $string;
     }
 
-    public static function warning_alert($message)
+    public static function warningAlert($message)
     {
         $string = '';
         if (is_array($message)) {
@@ -69,7 +63,7 @@ class Helper
         return $alert;
     }
 
-    public static function error_alert($message)
+    public static function errorAlert($message)
     {
         $string = '';
         if (is_array($message)) {
@@ -90,7 +84,7 @@ class Helper
         return $alert;
     }
 
-    public static function short_text($phrase, $max_words)
+    public static function shortText($phrase, $max_words)
     {
         $phrase_array = explode(' ', $phrase);
         if (count($phrase_array) > $max_words && $max_words > 0)
@@ -98,13 +92,13 @@ class Helper
         return $phrase;
     }
 
-    public static function is_super_admin()
+    public static function isSuperAdmin()
     {
         return Auth::user()->roles->where('id', 1)->first();
     }
 
 
-    public static function clean_special_char($string)
+    public static function cleanSpecialChar($string)
     {
         $string = str_replace(array('[\', \']'), '', $string);
         $string = preg_replace('/\[.*\]/U', '', $string);
@@ -116,7 +110,7 @@ class Helper
     }
 
     /**HTTP REQUEST / PENGGANTI GUZZLE */
-    public static function url_api($config)
+    public static function urlApi($config)
     {
         $url = env('API_URL') . $config['url'];
         $request = Http::withHeaders([
@@ -130,7 +124,7 @@ class Helper
     }
 
     /**summernote */
-    public static function input_summernote($value = ' ')
+    public static function inputSummernote($value = ' ')
     {
         libxml_use_internal_errors(true);
         $dom = new \DomDocument();
@@ -153,5 +147,13 @@ class Helper
 
         $value = $dom->saveHTML();
         return $value;
+    }
+
+    /** digunakan untuk bantuan save, biar tidak declare" terus di repositori */
+    public static function saveEloquent($eloquent, $data){
+        foreach ($data as $key => $value) {
+            $eloquent->$key = $value ?? null;
+        }
+        return $eloquent->save();
     }
 }

@@ -12,7 +12,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     /** ajax user */
-    public function sendSuccess($message, $redirect, $data = [])
+    public function sendJsonSuccess($message, $redirect, $data = [])
     {
         $response = [
             'response' => [
@@ -29,7 +29,7 @@ class Controller extends BaseController
         return response()->json($response)->original;
     }
 
-    public function sendError($message, $error = [])
+    public function sendJsonError($message, $error = [])
     {
         $response = [
             'response' => [
@@ -53,7 +53,7 @@ class Controller extends BaseController
 
     public function resError($error)
     {
-        $error = Helper::parsing_alert($error);
+        $error = Helper::parsingAlert($error);
         return back()
             ->with('error', $error);
     }

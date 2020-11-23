@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Original;
 
+use App\Helpers\Helper;
 use App\Model\CobaCrud;
 
 /**
@@ -26,18 +27,14 @@ class Repository
     public function create($request)
     {
         $data = new CobaCrud;
-        $data->name = $request['name'] ?? null;
-        $data->description = $request['description'] ?? null;
-        $data->save();
+        Helper::saveEloquent($data, $request);
         return $data;
     }
 
     public function edit($id, $request)
     {
         $data = $this->getFind($id);
-        $data->name = $request['name'] ?? null;
-        $data->description = $request['description'] ?? null;
-        $data->save();
+        Helper::saveEloquent($data, $request);
         return $data;
     }
 

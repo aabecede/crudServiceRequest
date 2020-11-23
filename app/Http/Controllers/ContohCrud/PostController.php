@@ -19,8 +19,8 @@ class PostController extends Controller
         try {
             DB::beginTransaction();
             $data = [
-                'name'        => $request->name,
-                'description' => $request->description
+                'name'        => $request->name ?? null,
+                'description' => $request->description ?? null
             ];
 
             app('App\Http\Controllers\Original\Repository')
@@ -40,7 +40,7 @@ class PostController extends Controller
         try {
             DB::beginTransaction();
             $data = [
-                'name' => $request->name,
+                'name'        => $request->name,
                 'description' => $request->description
             ];
 
