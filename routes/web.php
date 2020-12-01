@@ -17,4 +17,4 @@ Route::get('/', function () {
 });
 
 
-app('App\Http\Controllers\Original\RouteUrl')->route();
+app('App\Http\Controllers\ContohCrud\RouteUrl')->route();

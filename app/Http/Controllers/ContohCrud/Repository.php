@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Original;
+namespace App\Http\Controllers\ContohCrud;
 
 use App\Helpers\Helper;
 use App\Model\CobaCrud;

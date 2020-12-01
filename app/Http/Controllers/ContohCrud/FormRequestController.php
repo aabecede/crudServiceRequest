@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Dashboard;
+namespace App\Http\Controllers\ContohCrud;
 
 use App\Helpers\Helper;
 use Illuminate\Foundation\Http\FormRequest;
@@ -99,8 +99,8 @@ class FormRequestController extends FormRequest
     protected function failedValidation(Validator $validator)
     {
         $message =  "Error Validation " . $this->route('id');
-        $warning = Helper::parsing_alert($validator->errors()->all());
-        $response = app('App\Http\Controllers\Controller')->sendError($message, $warning);
+        $warning = Helper::parsingAlert($validator->errors()->all());
+        $response = app('App\Http\Controllers\Controller')->resError($message, $warning);
         // throw new HttpResponseException(response()->json($response, 200)); //versi ajax
         throw new HttpResponseException(
             back()->withInput()->with('warning', $warning)

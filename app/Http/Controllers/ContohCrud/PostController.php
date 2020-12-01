@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Original;
+namespace App\Http\Controllers\ContohCrud;
 
-use App\Http\Controllers\Admin\Dashboard\FormRequestController as Request;
+use App\Http\Controllers\ContohCrud\FormRequestController as Request;
 use App\Http\Controllers\Controller;
 use DB;
 
@@ -23,7 +23,7 @@ class PostController extends Controller
                 'description' => $request->description ?? null
             ];
 
-            app('App\Http\Controllers\Original\Repository')
+            app('App\Http\Controllers\ContohCrud\Repository')
                 ->create($data);
             DB::commit();
             $route   = route('alamat.index');
@@ -44,7 +44,7 @@ class PostController extends Controller
                 'description' => $request->description
             ];
 
-            app('App\Http\Controllers\Original\Repository')
+            app('App\Http\Controllers\ContohCrud\Repository')
                 ->edit($request->id, $data);
             DB::commit();
             $route   = route('alamat.index');
@@ -62,14 +62,14 @@ class PostController extends Controller
         try {
             DB::beginTransaction();
 
-            $find = app('App\Http\Controllers\Original\Repository')
+            $find = app('App\Http\Controllers\ContohCrud\Repository')
                 ->getFind($id);
 
             if (empty($find)) {
                 return $this->resError('Data tidak ditemukan');
             }
 
-            app('App\Http\Controllers\Original\Repository')
+            app('App\Http\Controllers\ContohCrud\Repository')
                 ->delete($id);
             DB::commit();
             $route   = route('alamat.index');
